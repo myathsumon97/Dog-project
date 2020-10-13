@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<student>
+		<no>1</no>
+		<name>Ngon</name>
+		<city>Tgi</city>
+	</student>
+	<student>
+		<no>2</no>
+		<name>Ngon</name>
+		<city>Tgi</city>
+	</student>
+	<student>
+		<no>3</no>
+		<name>Ngon</name>
+		<city>Tgi</city>
+	</student>

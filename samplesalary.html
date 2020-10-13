@@ -1,0 +1,186 @@
+	<!DOCTYPE html>
+<html>
+<head>
+	<title>Income Tax Calculator</title>
+	<script type="text/javascript" src="jquery.min.js"></script>
+	<script type="text/javascript">
+
+
+		
+		$(document).ready(function(){
+				
+
+			$("#btncal").click(function(){
+				var salary=parseInt($("#salary").val());
+				 var anaual_salary=salary*12;
+				 //$('#annual_salary').val(annual_salary);
+				// var annual_salary=parseInt($("#annual_salary").val());
+
+				alert('annual salary: '+anaual_salary);
+
+			//Parent condition
+			if ($("input[name=parent]:checked").val()=="father") 
+			{
+				var pdiscount=1000000;
+				//console.log(discount);
+			}
+			else if($("input[name=parent]:checked").val()=="mother")
+			{
+				var pdiscount=1000000;
+				//alert(discount);
+			}
+			else if($("input[name=parent]:checked").val()=="both")
+			{
+				var pdiscount=2000000;
+				//alert(discount);
+			}else {
+				var pdiscount=0;
+			}
+
+//----------------------------------------------------------------------------------------------------
+			//Single or marriage condition
+			if ($("input[name=spout]:checked").val()=="single")
+			{
+				var sdiscount=0;
+				//alert(sdiscount);
+			}
+			else if ($("input[name=spout]:checked").val()=="married")
+			{
+				var sdiscount=1000000;
+				//alert(sdiscount);
+			}
+			else {
+				var sdiscount=0;
+			}
+
+//----------------------------------------------------------------------------------------------------
+			
+			//number of child condition
+				var noc=parseInt($("#child").val());
+				var cdiscount=noc*500000;
+				//alert(cdiscount);
+				//console.log(cdiscount);
+
+//-----------------------------------------------------------------------------------------------------
+				
+			//SSB 
+				var ssb_disount=parseInt($("#ssb").val());
+
+//-----------------------------------------------------------------------------------------------------
+				
+			//Total Discount
+				var total_discount=pdiscount+sdiscount+cdiscount+ssb_disount;
+				$('#taxiable').val(total_discount);
+				alert(total_discount);
+			//taxable income
+				var taxiable=anaual_salary-total_discount;
+				$('#ta').val(taxiable);
+				alert('total taxiable: '+taxiable);
+
+
+	
+	
+
+//----------------------------------------------------------------------------------------------------
+			//Calculation about tax percentage
+			if (taxiable<=2000000) {
+				var tax1=0;
+				alert('You do not have to pay for tax');
+				
+			}
+			else if (taxiable>2000000 && taxiable<=5000000) {
+				var tax2=taxiable-2000000;
+				var result2=tax2*0.05;
+				//alert(result2);
+			}
+			else if (taxiable>5000000 && taxiable<=10000000) {
+				var tax2=3000000*0.05;
+				var tax3=taxiable-50;
+				var result3=tax3*0.1;
+				var result_total=tax2+result3;
+				//alert(result_total);
+			}
+
+			else if (taxiable>10000000 && taxiable<=20000000) {
+				var tax2=3000000*0.05;
+				var tax3=5000000*0.1;
+				var tax4=taxiable-10000000;
+				var result4=tax4*0.15;
+				var result_total=tax2+tax3+result4;
+				//alert(result_total);
+			}
+
+			else if(taxiable>2000000 && taxiable<=3000000){
+				var tax2=3000000*0.05;
+				var tax3=5000000*0.1;
+				var tax4=10000000*0.15;
+				var tax5=taxiable-20000000;
+				var result5=tax5*0.2;
+				var result_total=tax2+tax3+tax4+result5;
+				alert(result_total);
+			}
+			else if (taxiable>300000000) {
+				var tax2=3000000*0.05;
+				var tax3=5000000*0.1;
+				var tax4=10000000*0.15;
+				var tax5=10000000*0.2;
+				var result6=taxiable*0.25;
+				var result_total=tax2+tax3+tax4+tax5+result6;
+				alert(result_total);
+			}
+			
+		})
+	})
+
+	</script>
+</head>
+<body>
+	<h1 align="center">Income Tax Calculator</h1>
+	<table align="center">
+	<tr>
+		<td>Enter Your Salary:<input type="number" id="salary" value="salary" ></td>
+	</tr>
+	<tr>
+		<td>Annual Salary:<input type="number" id="anaual_salary" value="anaual_salary"></td>
+	</tr>
+
+	<tr>
+		<td>
+			<input type="radio" name="parent" value="father" id="father"> <label for="father">Father</label>
+			<input type="radio" name="parent" value="mother" id="mother"> <label for="mother">Mother</label>
+			<input type="radio" name="parent" value="both" id="both"> <label for="both">Both</label> 
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+			<input type="radio" name="spout" value="single" id="single"> <label for="single">Single</label>
+			<input type="radio" name="spout" value="married" id="married"> <label for="married">Married</label>
+		</td>
+	</tr>
+
+	<tr>
+		<td>Number of Child:<input type="number" name="child" id="child" max="10" min="0"> </td>
+	</tr>
+
+	<tr>
+		<td>SSB: <input type="number" id="ssb" name="" min="30000" max="60000"></td>
+	</tr>
+
+	<tr>
+		<td><button id="btncal">Calculate</button></td>
+	</tr>
+
+	<tr>
+		<td>Taxable Amount:<input type="number" id="ta" name="tax"></td>
+	</tr>
+	<tr>
+		<td>Total Tax:<input type="number" id="taxiable" readonly="taxiable"></td>
+	</tr>
+	<!-- <tr>
+		<td>Monthly Tax:<input type="number" name="" readonly="readonly"></td>
+	</tr> -->
+
+</table>
+</body>
+</html>

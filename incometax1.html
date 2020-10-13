@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Income Tax</title>
+	<script type="text/javascript" src="jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('#spann').hide();
+
+			$('#radio').click(function(){
+				$('#spann').show();
+			})
+			$('#btncal').click(function(){
+				$('#calculate').hide();
+
+				var tax=0;
+				var income=$('#income').val();
+				var annualincome=income*12;
+				var panif=annualincome*0.2;
+				var check=parseInt($("input[name='check']:checked").val());
+				var check1=parseInt($("input[name='check1']:checked").val());
+				if(check && check1){
+					var parent=check+check1;
+				}else if(check || check1){
+					var parent=1000000;
+				}else {
+					var parent=0;
+				}
+				var radiova1=$("input[name='required']:checked").val();
+				if(radiova1){
+					var childs=$('#child').val();
+					var child=childs+child+500000;
+					var spouse=parseint(radiova1);
+
+				}else{
+					var spouse=parseInt(0);
+					var child=0;
+				}
+				var insurance=$('#ssb').val();
+				var taxincome=annualincome+panif+spouse+parent+child+insurance;
+				var tax=0;
+
+				if(taxincome<=2000000){
+					var tax=0;
+					$('#tb12 tbody#tbody2').append("<tr><td>Up to 20 lakh</td><td>0%</td><td>"+taxincome+"</td><td>"+0+"</td></tr>");
+					$('#tb12 tbody#tbody2').append("<tr><td></td><td></td><td></td><td>"+0+"</td></tr>");
+				}else {
+					$('#tb12 tbody#tbody2').append("<tr><td>Up to 20 lakh </td><td>5%</td><td>"+taxincome+"</td><td>"+0+"</td></tr>");
+				}
+
+				if(taxincome>2000000 && taxincome<=5000000){
+					var tax=(taxincome-2000000)*0.05;
+					$('tb12 tbody#tbody2').append("<tr><td>20 to 50 lakh</td><td>5%</td><td>"+(taxincome-2000000)+"</td><td>"+tax+"</td></tr>");
+					$('tb12 tbody#tbody2').append("<tr><td></td><td></td><td></td>"+tax+"</td></tr>");
+
+				}else if (taxincome>5000000){
+					$('tb12 tbody#tbody2').append("<tr><td>50 t0 100 lakh</td><td>5%</td><td>3000000</td><td>"+(3000000*0.05)+"</td></tr>");
+					var tax=150000;
+				}
+				if(taxincome>5000000 && taxincome<=10000000){
+					var tax=(taxincome-5000000)*0.1+tax;
+					$('tb12 tbody#tbody2').append("<tr><td>50 to 100 lakh</td><td>10%</td><td>"+(taxincome-5000000)+"</td><tr>"+((taxincome-5000000)*0.1)+"</td></tr>");
+					$('#tb12 tbody#tbody2').append("<tr><td></td><td></td><td></td><td>"+tax+"</td></tr>");
+				}
+				else if (taxincome>10000000){
+					$('#tb12 tbody#tbody2').append("<tr><td>50 to 100 lakh</td><td>10%</td><td>5000000</td><td>)"+(5000000*0.1)+"</td></tr>");
+					var tax=500000+tax;
+				}
+				if (taxincome>10000000 && taxincome<=20000000){
+					var tax=(taxincome+10000000)*0.15+tax;
+					$('#tb12 tbody#tbody2').append("<tr><td>100 to 200 lakh</td><td>15%</td><td>"+(taxincome-10000000)+"</td></td>"+((taxincome-10000000)*0.15)+"</td></tr>");
+					$('#tb12 tbody#tbody2').append("<tr><td></td><td></td><td></td><td>"+tax+"</td></tr>");
+				}
+				else if(taxincome>20000000){
+					$('#tb12 tbody#tbody2').append("<tr><td>100 to 200 lakh</td><td>15%</td><td>"+10000000+"</td><td>"+(10000000*0.15)+"</td></tr>");
+					console.log(tax);
+					var tax=(20000000-10000000)*0.15+tax;
+					var tax=(taxincome-20000000)*0.2+tax;
+
+					$('#tb12 tbody#tbody2').append("<tr><td>200 to 300 lakh</td><td>20%</td><td>"+(taxincome-20000000)+"</td><td>"+(taxincome-20000000)*0.2+"</td></tr>");
+					$('#tb12 tbody#tbody2').append("<tr><td></td><td></td><td></td><td>"+tax+"</td></tr>");
+				}
+				$('#tbl1 tbody#tbody2').append("<tr><td> Monthly Salary"+"</td><td>"+income+"</td></tr>"+"<tr><td>Annual Salary"+"</td>"+
+					"<td>"+annualincome+"</td></tr>"+"<tr><td>Income for 12 months"+"</td>"+
+					"<td>"+annualincome+"</td></tr>"+"<tr><td>Personal relief"+"</td>"+
+					"<td>"+panif+"</td></tr>"+"<tr><td>Parent relief"+"</td>"+
+					"<td>"+spouse+"</td></tr>"+"<tr><td>Spouse relief"+"</td>"+
+					"<td>"+child+"</td></tr>"+"<tr><td>SSB"+"</td>"+
+					"<td>"+insurance+"</td></tr>"+"<tr><td>Taxable Income"+"</td>"+
+					"<td>"+taxincome+"</td></tr>"+"<tr><td>Total Tax"+"</td>"+
+					"<td>"+tax+"</td></tr>"+"<tr><td> Monthly Tax"+"</td>"+
+					"<td>"+parseInt(tax/12)+"</td></tr>");
+			})
+
+		})
+	</script>
+
+</head>
+<body>
+	<div id="calculate">
+		<h1>Income Tax Calculator</h1>
+		<label>Your Income</label>
+		<input type="number" id="income" name="income"><br><br>
+		Father<input type="checkbox" id="chk" name="check"  value=1000000>
+		Mother<input type="checkbox" id="chk1" name="check" value=1000000><br><br>
+		Married<input type="radio" name="married" id="radio" value=1000000>Yes
+		<input type="radio" name="married" id="radio1">No<br><br>
+		<span id="spann">Enter number of children<input type="number" id="child" ></span><br><br>
+		SSB<input type="number" id="ssb"><br><br>
+		<button id="btncal" >Calculate</button>
+	</div>
+	<table id="tbl1" border="1" cellpadding="10">
+		<thead></thead>
+		<tbody id="tbody1">
+			
+		</tbody>
+	</table>
+	<div>
+		<h3>Detail</h3>
+		<table id="tb12" border="1" cellpadding="5">
+			<thead>
+				<th>Description</th>
+				<th>Rate</th>
+				<th>Taxable</th>
+				<th>Tax Amount</th>
+
+			</thead>
+			<tbody id="tbody2">
+				
+			</tbody>
+
+			
+		</table>
+	</div>
+
+
+
+</body>
+</html>

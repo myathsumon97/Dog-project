@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>JQuery Fade</title>
+	<script type="text/javascript" src="jquery.min.js">
+		
+	</script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#btnfadeout").click(function(){
+				$('img').fadeOut(1000);
+			})
+
+			$("#btnfadein").click(function(){
+				$('img').fadeIn(1000);
+			})
+
+			$("#btntoggle").click(function(){
+				$('img').fadeToggle(2000);
+			})
+
+			$("#btnfadeto").click(function(){
+				$('img').fadeTo(2000,0.2);
+			})
+
+			$("#btnslideup").click(function(){
+				$('img').slideUp(1000);
+			})
+
+			$("#btnsllidedown").click(function(){
+				$('img').slideDown(1000);
+			})
+
+			$("#btnslidetoggle").click(function(){
+				$('img').slideToggle(1000);
+			})
+
+		})
+	</script>
+</head>
+<body>
+
+
+	<img src="1.jpeg" width="300" height="300"><br>
+	<button id="btnfadeout">Fade Out</button>
+	<button id="btnfadein">Fade in</button>
+	<button id="btntoggle">Fade Toggle</button>
+	<button id="btnfadeto">Fade To</button>
+	<button id="btnslideup">Slide Up</button>
+	<button id="btnsllidedown">Slide Down</button>
+	<button id="btnslidetoggle">Slide Toggle</button>
+
+
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>JQuery Content</title>
+	<script type="text/javascript" src="jquery.min.js">
+		
+	</script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#name").change(function(){
+				var name=$(this).val();
+				alert(name);
+				$("label").html(name);
+				$(this).val($("h1").html());
+			})
+
+
+
+			$("h1").click(function(){
+				var html=$(this).html();
+				alert(html);
+				$("label").html(html);
+			})
+			$("p").click(function(){
+				$("label").html($(this).html());
+			})
+
+		})
+	</script>
+</head>
+<body> 
+	Enter Your Name:<input type="text" id="name" ><br>
+	<h1>JQuery <i>H1 </i>Element</h1>
+	<p>JQuery <i>P</i> Element</p>
+	<label></label>
+	<br>
+</body>
+</html>

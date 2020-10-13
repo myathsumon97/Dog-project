@@ -1,0 +1,55 @@
+	<!DOCTYPE html>
+<html>
+<head>
+	<title>Student List</title>
+	<script type="text/javascript" src="jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			
+			var i=1;
+			$("#btnregister").click(function(){
+				var name=$("#name").val();
+				var city=$("#city").val();
+				console.log(name,city);
+				if(name && name!="" && city && city!=""){
+					// real code insert table
+					
+					var html=`<tr>
+					<td>${i++}</td>
+					<td>${name}</td>
+					<td>${city}</td>
+					</tr>`;
+					$("tbody").append(html);
+
+					// Data Clear in input
+					$("#name").val("");
+					$("#city").val("");
+				}else {
+					alert('plz fill all!');
+				}
+			})
+		})
+	</script>
+</head>
+<body>
+	<h1>Student Registration</h1>
+	Name:<input type="text" id="name"><br>
+	City:<input type="text" id="city"><br>
+	<button id="btnregister">Register</button>
+
+	<h1>Student table</h1>
+	<table border="1" cellpadding="5">
+		<thead>	
+			<tr>
+				<th>No.</th>
+				<th>Name</th>
+				<th>City</th>
+			</tr>
+		</thead>
+		<tbody>
+			
+		</tbody>
+		
+	</table>
+</body>
+</html>

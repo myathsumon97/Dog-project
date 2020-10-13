@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>My Shop</title>
+	<script type="text/javascript" src ="jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			count_item();
+			function count_item(){
+				var cart=localStorage.getItem('cart');
+				if(cart){
+					var cartobj=JSON.parse(cart);
+					var total=0;
+					$.each(cartobj.itemlist,function(i,v){
+						total+=parseInt(v.qty);
+					});
+				}
+			}
+		})
+	</script>
+</head>
+<body>
+	<a href="">Your Cart<label id="itemcount"></label>
+	</a>
+	<h1>My Shop</h1>
+	<table>
+		<tr>
+			<td><img src="shoe1.jpeg" width="100" height="100" border="1"><br>
+				shoe1<br>
+				Price:10000Kyats<br>
+				<button class="btnadd" data-id="1" data-name="shoe1" data-price="10000" data-photo=shoe1.jpeg>Add to Cart</button>
+			</td>
+			<td><img src="shoe1.jpeg" width="100" height="100" border="1"><br>
+				shoe1<br>
+				Price:10000Kyats<br>
+				<button class="btnadd" data-id="1" data-name="shoe1" data-price="10000" data-photo=shoe1.jpeg>Add to Cart</button>
+			</td>
+			<td><img src="shoe1.jpeg" width="100" height="100" border="1"><br>
+				shoe1<br>
+				Price:10000Kyats<br>
+				<button class="btnadd" data-id="1" data-name="shoe1" data-price="10000" data-photo=shoe1.jpeg>Add to Cart</button>
+			</td>
+			<td><img src="shoe1.jpeg" width="100" height="100" border="1"><br>
+				shoe1<br>
+				Price:10000Kyats<br>
+				<button class="btnadd" data-id="1" data-name="shoe1" data-price="10000" data-photo=shoe1.jpeg>Add to Cart</button>
+			</td>
+			<td><img src="shoe1.jpeg" width="100" height="100" border="1"><br>
+				shoe1<br>
+				Price:10000Kyats<br>
+				<button class="btnadd" data-id="1" data-name="shoe1" data-price="10000" data-photo=shoe1.jpeg>Add to Cart</button>
+			</td>
+			<td><img src="shoe1.jpeg" width="100" height="100" border="1"><br>
+				shoe1<br>
+				Price:10000Kyats<br>
+				<button class="btnadd" data-id="1" data-name="shoe1" data-price="10000" data-photo=shoe1.jpeg>Add to Cart</button>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>

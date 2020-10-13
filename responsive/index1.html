@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Creative</title>
+	<meta content="width=device-width , initial-scale=1.0" name="viewpoint">
+	<meta lang="UTF-8">
+	<link rel="stylesheet" href="style1.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+	<section>
+		<div class="logo">Creative</div>
+		<img src="bg1.jpeg" alt="" class="bg">
+		<div class="content">
+			<h2>Let's Make <br> Something Creative</h2>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+			<a href=""> Get Started</a>
+		</div>
+		<p class="copyrightext">@2020.Online Tutorial</p>
+	</section>
+	<div class="menu-toggle" onclick="menutoggle()">
+		<div class="line"></div>
+		<div class="line"></div>
+		<div class="line"></div>
+	</div>
+	<div class="navigation">
+		<ul>	
+			<li><a href="">Home</a></li>
+			<li><a href="">About</a></li>
+			<li><a href="">Service</a></li>
+			<li><a href="">Contact</a></li>
+		</ul>
+		<div class="socialBar">
+			<ul>
+				<li><i class="fa fa-facebook" aria-hidden="true"></i></li>
+				<li><i class="fa fa-youtube-play" aria-hidden="true"></i></li>
+				<li><i class="fa fa-instagram" aria-hidden="true"></i></li>
+			</ul>
+			<a href="mailto:you@email.com" class="emailbox"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>
+		</div>
+	</div>
+	<script>
+		function menutoggle(){
+			var menutoggle = document.querySelector('.menu-toggle');
+			menutoggle.classList.toggle('active');
+			var navigation = document.querySelector('.navigation');
+			navigation.classList.toggle('active');
+		}
+	</script>
+</body>
+</html>

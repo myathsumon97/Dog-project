@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Income Tax Calculator</title>
+	<script type="text/javascript" src="jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+
+			$('#calculate').click(function(){
+				var in=$('#m_income').val();
+				var m_income=parseInt(in);
+				console.log(m_income);
+
+
+				var father=$('input[name="dad"]:checked').val();
+				var mother=$('input[name="mom"]:checked').val();
+				var spouse=$('input[name="spouse"]:checked').val();
+				
+
+				if(father){
+					father=1000000;
+					console.log(father);
+				}else
+				{
+					father=0;}
+
+				if(mother){
+					mother=1000000;
+					console.log(mother)
+				}else{
+					mother=0;}
+
+				var parent=father+mother;
+				
+				$('#parent').html(parent);
+
+				if(spouse){
+					spouse=1000000;
+				}else{
+					spouse=0;
+				}
+
+				console.log(spouse)
+				$('#sspouse').html(spouse);
+				$('#income').html(m_income);
+				
+				var annual=parseInt(m_income*12);
+				$('#a_income').html(annual);
+				console.log(annual);
+
+				var bdiscount=parseInt(annual*0.2);
+				$('#bdiscount').html(bdiscount);
+				console.log(bdiscount);
+
+				var t=$('#othertaxes').val();
+				var othertax=parseInt(t);
+				console.log(othertax);
+				$('#othertax').html(othertax);
+
+				var c=$('#nofchild').val();
+				var noc=parseInt(c);
+				console.log(noc);
+				var nofchild=parseInt(noc*(500000));
+				$('#children').html(nofchild);
+
+				var total=Math.abs((annual-(bdiscount+parent+spouse+nofchild+othertax))*-1);
+				console.log(total);
+				$('#totalincome').html(total);
+
+				var t;
+				var a;
+				
+				if(total>=1 && total<=2000000)
+				{
+					 t=0;
+					 a=0;
+					 
+					 
+				}
+				else if(total>2000000 && total<=5000000)
+				{
+					 t=5;
+					 a=parseInt((total-2000000)*0.05);
+					 
+					}
+				else if(total>5000000 && total<=10000000)
+				{
+					 t=10;
+					 if(total-2000000>5000000)
+					 {
+						 a=parseInt((3000000*0.05)+(total-5000000)*0.1);
+					 }
+						
+					 
+				}
+				else if(total>10000000 && total<=20000000)
+				{
+					 t=15;
+                     if((total-2000000)>10000000)
+                     {
+                        a=parseInt((3000000*0.05)+(5000000*0.1)+(total-10000000)*0.15);
+                     }
+					 
+				}
+				else if(total>20000000 && total<=30000000)
+				{
+					 t=20;
+                     if((total-2000000)>20000000)
+                     {
+                        a=parseInt((3000000*0.05)+(5000000*0.1)+(10000000*1.5)+(total-20000000)*0.2);
+                     }
+					 
+				}
+				else if(total>30000000)
+				{
+					 t=25;
+                     if((total-2000000)>30000000)
+                     {
+                        a=parseInt((3000000*0.05)+(5000000*0.1)+(10000000*1.5)+(20000000*0.2)+(total-20000000)*0.25);
+                     }
+					 
+					 
+				}
+
+				$('#taxamount').html(a);
+				$('#mtaxamount').html(parseInt(a/12));
+					$('#taxrate').html(t+'%');
+
+			})
+		})
+	</script>
+</head>
+<body>
+	<h1>Income Tax Calculator</h1>
+	<span>Monthly Income:</span><input type="number" id="m_income"><br>
+
+	
+	<input type="checkbox" id="father" name="dad">Father
+	<input type="checkbox" id="mother" name="mom">Mother
+	<input type="checkbox" id="spouse" name="spouse">Spouse <br>
+	<span>No: of Children</span><input type="number" id="nofchild"><br>
+	<span>Other Tax Deduction</span><input type="number" id="othertaxes"><br><br>
+
+	<button id="calculate">Calculate</button><br><br>
+
+	
+	<span>Monthly Income:</span><span id="income"></span><br>
+	<span>Annual Income:</span><span id="a_income"></span><br>
+	<span>Basic Discount:</span><span id="bdiscount"></span><br>
+	<span>Parent Discount:</span><span id="parent"></span><br>
+	<span>Spouse Discount:</span><span id="sspouse"></span><br>
+	<span>Discount for Children:</span><span id="children"></span><br>
+	<span>Other Tax Deduction(SSB):</span><span id="othertax"></span><br><br>
+
+	<span>Annual Income Before Tax:</span><span id="totalincome"></span><br>
+	<span>Tax Rate:</span><span id="taxrate"></span><br><br>
+	<span>Annual Tax Amount:</span><span id="taxamount"></span><br>
+	<span>Monthly Tax Amount:</span><span id="mtaxamount"></span><br><br>
+	
+
+</body>
+</html>

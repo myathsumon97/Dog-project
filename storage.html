@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>JS Storage</title>
+	<script type="text/javascript">
+		var student={name:"Mg Mg",
+					city:"Yangon",
+					languages:[]};
+		console.log(student);
+		student.languages.push('PHP');
+		student.languages.push('JS');
+		console.log(student);
+
+		// Js obj to string
+		var stujson= JSON.stringify(student);
+		console.log(stujson);
+		// obj to localstorage
+		localStorage.setItem('stuobj',student);
+		localStorage.setItem('stujson',stujson);
+
+		var myjson=localStorage.getItem('stujson');
+		console.log('Json String',myjson);
+
+		// to string
+		var myjsonobj=JSON.parse(myjson); 
+		console.log(myjsonobj);
+		;
+
+		var mystudentlistjson='{"studentlist": [] }';
+
+		// Json string to obj
+		var myobj=JSON.parse(mystudentlistjson);
+		console.log("My obj",myobj);
+
+		// obj to json string
+		var studentlistobj={studentlist:[]};
+		var jsonstudentobj=JSON.stringify(
+			studentlistobj);
+		console.log(jsonstudentobj);
+
+		console.log(studentlistobj);
+		studentlistobj.studentlist.push(student);
+		console.log(studentlistobj);
+
+		studentlistobj.studentlist[0].city='Madalay';
+		console.log(studentlistobj);
+
+		
+
+
+	</script>
+</head>
+<body>
+
+</body>
+</html>

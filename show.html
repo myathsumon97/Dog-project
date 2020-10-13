@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Show JQuery</title>
+	<script type="text/javascript" src="jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#btnhide").click(function(){
+				$("p").hide("slow",function(){
+					alert('Hide ok!');
+				});
+
+			})
+			$("#btnshow").click(function(){
+				$("p").show(1000,function(){
+					alert('Show ok!')
+				});
+				$("#btntoggle").click(function(){
+					$("p").toggle(2000);
+				})
+
+			})
+
+
+		})
+	</script>
+</head>
+<body>
+	<p>JQuery Show hide</p>
+	<button id="btnhide">Hide</button>
+	<button id="btnshow">Show</button>
+	<button id="btntoggle">Toggle</button>
+
+</body>
+</html>

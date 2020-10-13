@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Myanmar Income Tax Calculator</title>
+	<script type="text/javascript" src="jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('#calculate').click(function(){
+				var a=('#m_income').val();
+				var m_income=parseInt(a);
+				//console.log(mincome);
+				var annualincome=parseint(inc*12);
+				$('#aincome').html(annualincome);
+				console.log(annualincome);
+
+				var bdiscount=parseInt(annualincome*0.2);
+				$('#bdiscount').html(bdiscount);
+				console.log(bdiscount);
+
+				var other=$('#othertax').val();
+				var othertax=parseInt(other);
+				$('#othertax').html(othertax);
+
+				var child=$('#noofchild').val();
+				var nochild=parseint(child);
+				console.log(nochild);
+				var noofchild=parseInt(nochild*500000);
+				$('#children').html(noofchild);
+
+				var check=parseInt($("input[name='check']:checked").val());
+				var check1=parseInt($("input[name='check1']:checked").val());
+				if(check && check1){
+					var parent=check+check1;
+				}else if(check || check1){
+					var parent=1000000;
+				}else {
+					var parent=0;
+				}
+				if(spouse){
+					spouse=1000000;
+				}else{
+					spouse=0;
+				}
+				console.log(spouse);
+				$('#sspouse').html(spouse);
+				$('#income').html(mincome);
+
+				var total=parseInt((annualincome-(bdiscount+othertax+noofchild+parent+spouse))*-1);
+				console.log(total);
+				$('#taxable').html(total);
+
+				var	 tax;
+				var i;
+				 if(total>=1 && total<=2000000){
+				 	tax=0;
+				 	i=0;
+				 }else if(total>2000000 && total<=5000000)
+				{
+					 tax=5;
+					 i=parseInt((total-2000000)*0.05);
+					 
+					}
+				else if(total>5000000 && total<=10000000)
+				{
+					 tax=10;
+					 if(total-2000000>5000000)
+					 {
+						 i=parseInt((3000000*0.05)+(total-5000000)*0.1);
+					 }
+						
+					 
+				}
+				else if(total>10000000 && total<=20000000)
+				{
+					 tax=15;
+                     if((total-2000000)>10000000)
+                     {
+                        i=parseInt((3000000*0.05)+(5000000*0.1)+(total-10000000)*0.15);
+                     }
+					 
+				}
+				else if(total>20000000 && total<=30000000)
+				{
+					 tax=20;
+                     if((total-2000000)>20000000)
+                     {
+                        i=parseInt((3000000*0.05)+(5000000*0.1)+(10000000*1.5)+(total-20000000)*0.2);
+                     }
+					 
+				}
+				else if(total>30000000)
+				{
+					 tax=25;
+                     if((total-2000000)>30000000)
+                     {
+                        i=parseInt((3000000*0.05)+(5000000*0.1)+(10000000*1.5)+(20000000*0.2)+(total-20000000)*0.25);
+                     }
+                 }
+
+                 $('#taxamount').html(i);
+				$('#mtaxamount').html(parseInt(i/12));
+					$('#taxrate').html(tax+'%');
+
+			})
+		})
+
+	</script>
+</head>
+
+<body>
+	<h1>Myanmar Income Tax Calculator</h1>
+	<span>Monthly Income</span><input type="number" id="m_income"><br>
+	<input type="checkbox" id="father" name="father">Father
+	<input type="checkbox" id="mother" name="mother">Mother
+	<input type="checkbox" id="spouse" name="spouse">Spouse<br>
+	<span>No. of Children</span><input type="number" id="noofchild"><br>
+	<span>Other Tax Deduction</span><input type="number" id="othertax"><br><br>
+	<button id="calculate">Calculate</button><br><br>
+
+	<span>Monthly Income:</span><span id="m_income"></span><br>
+	<span>Annual Income</span><span id="annualincome"></span><br>
+	<span>Basic Discount</span><span id="bdiscount"></span><br>
+
+	<span>Father</span><span><input type="checkbox" id="check" name="check"  value=1000000></span>
+	<span>Mother</span><span><input type="checkbox" id="check1" name="check" value=1000000></span><br><br>
+	<span>Parent Relief</span><span id="paref"></span><br>
+	<span>Spouse Relief</span><span id="sspouse"></span><br>
+	<span>Child Relief</span><span id="children"></span><br>
+	<span>Other Tax Calculator</span><span id="othertax"></span><br><br>
+	<span>Taxable Income</span><span id="taxable"></span><br>
+	<span>Tax Rate:</span><span id="taxrate"></span><br><br>
+	<span>Annual Total Ta:</span><span id="taxamount"></span><br>
+	<span>Monthly Tax Amount:</span><span id="mtaxamount"></span><br><br>
+
+
+
+
+</body>
+</html>

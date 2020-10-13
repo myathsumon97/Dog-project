@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>My Shop</title>
+	<script type="text/javascript " src="jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+
+			count_item();
+			function count_item(){
+				var cart=localStorage.getItem('cart');
+				if(cart){
+					var cartobj=JSON.parse(cart);
+				var	total=0;
+					$.each(cartobj.itemlist,function(i,v){
+						total+=parseInt(v.qty);
+
+					});
+					$("#item_count").html('['+total+']');
+				}
+			}
+			$(".btnadd").click(function(){
+				var id=$(this).data('id');
+				var name=$(this).data('name');
+				var price=$(this).data('price');
+				var photo=$(this).data('photo');
+				var item={
+					id:id,
+					name:name,
+					price:price,
+					photo:photo,
+					qty:1,
+				
+				}
+				console.log(item);
+
+				var cart=localStorage.getItem('cart');
+				if(!cart){
+					cart='{"itemlist":[]}';
+				}
+				var cartobj=JSON.parse(cart);
+				var hasid=false;
+				$.each(cartobj.itemlist,function(i,v){
+					console.log(v.id);
+					if(v.id==id){
+						hasid=true;
+						v.qty++;
+					}
+				})
+				if(!hasid){
+					cartobj.itemlist.push(item);
+
+				}
+
+				localStorage.setItem('cart',JSON.stringify( cartobj));
+				console.log(cartobj);
+				alert('Item Added to Cart!');
+				count_item();
+			})
+		})
+	</script>
+</head>
+<body>
+	<a href="cart.html">Your Cart<label id="item_count"></label>
+	</a>
+	<h1>My Shop</h1>
+	<table>
+		<tr>
+			<td><img src="shoe3.jpeg" width="150" height="150" border="1"><br>
+			Shoe 1<br>
+			Price:12000Kyats<br>
+			<button class="btnadd" data-id="1" data-name="Shoe 1" data-price="12000" data-photo="shoe3.jpeg">Add to Cart</button>
+		</td>
+
+		
+		<td><img src="shoe1.jpeg" width="150" height="150" border="1"><br>
+			Shoe 2<br>
+			Price:12000Kyats<br>
+			<button class="btnadd" data-id="3" data-name="Shoe 2" data-price="12900" data-photo="shoe1.jpeg">Add to Cart</button></td>
+		
+
+		<td><img src="shoe2.jpeg" width="150" height="150" border="1"><br>
+			Shoe 3<br>
+			Price:12000Kyats<br>
+			<button class="btnadd" data-id="4" data-name="Shoe 3" data-price="12000" data-photo="shoe2.jpeg">Add to Cart</button></td>
+
+		<td><img src="shoe4.jpeg" width="150" height="150" border="1"><br>
+			Shoe 4<br>
+			Price:10000Kyats<br>
+			<button class="btnadd" data-id="4" data-name="Shoe 4" data-price="12900" data-photo="shoe4.jpeg">Add to Cart</button></td>
+		</tr>
+	</table>
+
+</body>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Expense List</title>
+	<script type="text/javascript" src="jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+
+			showtable();
+			$("#diveditexpense").hide();
+			$("#divaddexpense").show();
+
+			$("#btnupdate").click(function(){
+				var eid=$("#eid").val();
+				var ename=$("#ename").val();
+				var eamount=$("#eamount").val();
+				var edate=$("#edate").val();
+
+				var expenselistjson=localStorage.getItem('expenselist');
+				var expenselistobj=JSON.parse(expenselistjson);
+				expenselistobj.expenselist[eid].date=edate;
+				expenselistobj.expenselist[eid].name=ename;
+				expenselistobj.expenselist[eid].amount=eamount;
+
+				localStorage.setItem('expenselist',JSON.stringify(expenselistobj));
+				// show updae table
+				showtable();
+				$("#diveditexpense").hide(1000);
+				$("#divaddexpense").show(1000);
+
+
+			})
+
+			$("tbody").on('click','.btndelete' ,function(){
+				var id=$(this).data('id');
+				console.log(id);
+
+				var ans=confirm('Are you sure?');
+				if(ans){
+
+
+				var expenselistjson=localStorage.getItem('expenselist');
+				var expenselistobj=JSON.parse(expenselistjson);
+					// delete data from array using splice
+					expenselistobj.expenselist.splice(id,1);
+
+					// Store update value in localStorage
+					localStorage.setItem('expenselist',JSON.stringify(expenselistobj));
+
+					// show update table
+					showtable();
+				}
+
+
+			})
+
+			$("tbody").on('click','.btnedit' ,function(){
+				var id=$(this).data('id');
+				console.log(id);
+				$("#divaddexpense").hide(1000);
+				$("#diveditexpense").show(1000);
+				var expenselistjson=localStorage.getItem('expenselist');
+				
+				var expenselistobj=JSON.parse(expenselistjson);
+				console.log(expenselistobj);
+				var date=expenselistobj.expenselist[id].date;
+				var name=expenselistobj.expenselist[id].name;
+				var amount=expenselistobj.expenselist[id].amount;
+				$("#eid").val(id);
+				$("#ename").val(name);
+				$("#eamount").val(amount);
+				$("#edate").val(date);
+
+
+			})
+
+			$("#btnadd").click(function(){
+				var date=$("#date").val();
+				var name=$("#name").val();
+				var amount=$("#amount").val();
+				console.log(date,name,amount);
+
+				var expense={
+					date:date,
+					name:name,
+					amount:amount
+				}
+
+
+				var expenselistjson=localStorage.getItem('expenselist');
+				if(!expenselistjson){
+					//creat new json
+				
+					 expenselistjson='{"expenselist":[]}';
+
+				}
+				
+				//json to obj
+				var expenselistobj=JSON.parse(expenselistjson);
+
+				//push expense to expenselist
+				expenselistobj.expenselist.push(expense);
+				console.log(expenselistobj);
+				$("#date").val('');
+				$("#name").val('');
+				$("#amount").val('');
+				//store expenselist in localstorage
+				localStorage.setItem('expenselist', JSON.stringify(expenselistobj));
+				showtable();
+			});
+			showtable();
+
+
+			function showtable(){
+				var expenselistjson=localStorage.getItem('expenselist');
+				if(expenselistjson){
+					var expenselistobj=JSON.parse(expenselistjson);
+					console.log(expenselistobj);
+
+					// get array from Object
+					var expenselistarray=expenselistobj.expenselist;
+					// foreach loop
+					var html='' ; var j=1 ;var total=0;
+					$.each( expenselistarray, function( i, v){
+						console.log(i,v);
+						var name=v.name;
+						var amount=v.amount;
+						var date=v.date;
+						total+= parseInt(amount);
+
+						html+=`<tr>
+							<td>${j++}</td>
+							<td>${date}</td>
+							<td>${name}</td>
+							<td>${amount}</td>
+							<td><button class='btnedit' data-id=${i}>Edit</button></td>
+							<td><button class='btndelete' data-id=${i}>Delete</button></td>
+
+
+						</tr>`;
+					})
+					html+=`<tr><td>Total</td><td colspan='3'><center>${total}</center></td></tr>`
+					$("tbody").html(html);
+				}
+			}
+		})
+	</script>
+</head>
+
+
+<body>
+<div id="divaddexpense">
+	<h1>Expense Entry</h1>
+	Date:<input type="date" id="date"><br>
+	Name:<input type="text" id="name"><br>
+	Amount:<input type="number" id="amount"><br>
+	<button id="btnadd">Add Expense</button>
+</div>
+
+<div id="diveditexpense">
+	<h1>Expense Edit</h1>
+	<input type="hidden" id="eid">
+	Date:<input type="date" id="edate"><br>
+	Name:<input type="text" id="ename"><br>
+	Amount:<input type="number" id="eamount"><br>
+	<button id="btnupdate">Update Expense</button>
+</div>
+
+	<h1>Expense Table</h1>
+	<table border="1" cellpadding="5">
+	<thead>
+		<tr>
+			<th>No</th>
+			<th>Date</th>
+			<th>Name</th>
+			<th>Amount</th>
+			<th>Edit</th>
+			<th>Delete</th>
+		</tr>
+	</thead>
+	<tbody>
+		
+	</tbody>
+</table>
+
+
+</body>
+</html>
+
+
+

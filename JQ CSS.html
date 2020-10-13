@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>JQ CSS</title>
+	<style type="text/css">
+		.blue{
+			color: blue;
+		}
+		.red{
+			color: red;
+		}
+	</style>
+	<script type="text/javascript" src="jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#btnchange").click(function(){
+				$("h1").css({'color':'blue','font-size':'12px'});
+				$("p").css('font-size','35px');
+
+				$("h3").addClass('blue');
+				$("h2").removeClass('blue');
+				$("h4").removeClass('red');
+				$("h4").addClass("blue");
+				$("h2").addClass("red");
+			})
+
+
+		})
+	</script>
+</head>
+<body>
+	<h1> JQuery CSS</h1>
+	<p>JQ is funny</p>
+	<h2 class="blue">H2 Element</h2>
+	<h3>H3 Element</h3>
+	<h4 class="red">H4 Element</h4>
+	<button id="btnchange">Change</button>
+	<button>Add</button>
+	<button>Remove</button>
+
+</body>
+</html>
